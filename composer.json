@@ -1,0 +1,28 @@
+{
+    "name": "oscarotero/server",
+    "type": "library",
+    "description": "Simple class to emulate Apache's 'mod_rewrite' functionality from the built-in PHP web server",
+    "keywords": ["server", "rewrite"],
+    "homepage": "https://github.com/oscarotero/server",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Oscar Otero",
+            "email": "oom@oscarotero.com",
+            "homepage": "http://oscarotero.com",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "oom@oscarotero.com",
+        "issues": "https://github.com/oscarotero/server/issues"
+    },
+    "require": {
+        "php": ">=5.4"
+    },
+    "autoload": {
+        "psr-0": {
+            "Server": "src/"
+        }
+    }
+}
