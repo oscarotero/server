@@ -17,10 +17,11 @@ class Server
      *
      * @param string|null $cwd
      * @param array $index
+     * @param string $front
      *
      * @return bool|string
      */
-    public static function run($cwd = null, array $index = ['html', 'php'])
+    public static function run($cwd = null, array $index = ['html', 'php'], $front = '/index.php')
     {
         if ($cwd === null) {
             $cwd = getcwd();
@@ -28,20 +29,29 @@ class Server
 
         $file = self::getFilePath($cwd, $index);
 
+        //The file does not exists
         if ($file === false) {
             return false;
         }
 
+        //The file is the front controller
+        if (!empty($front) && ($file === $cwd.$front)) {
+            return false;
+        }
+
+        //The file can be served by the php server
         if ($cwd === getcwd()) {
             return true;
         }
 
         $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
 
+        //The file is a php script that must be included
         if ($ext === 'php') {
             return $file;
         }
 
+        //Output the file content
         if (isset(self::$mimes[$ext])) {
             $mime = self::$mimes[$ext];
         } else {
